@@ -1,5 +1,6 @@
 package id.dojo.addressapp.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javafx.beans.property.IntegerProperty;
@@ -14,8 +15,9 @@ import javafx.beans.property.StringProperty;
  *
  * @author Marco Jakob
  */
-public class Person {
+public class Person implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty street;
@@ -40,6 +42,17 @@ public class Person {
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
+
+//    public Person() {}
+//
+//    public Person(String firstName, String lastName, String street, int postalCode, String city, LocalDate birthday) {
+//        this.firstName = String.valueOf(firstName);
+//        this.lastName = lastName;
+//        this.street = street;
+//        this.postalCode = postalCode;
+//        this.city = city;
+//        this.birthday = birthday;
+//    }
 
     public String getFirstName() {
         return firstName.get();
@@ -111,5 +124,21 @@ public class Person {
 
     public ObjectProperty<LocalDate> birthdayProperty() {
         return birthday;
+    }
+
+    public PersonData toPersonData() {
+        return new PersonData(getFirstName(), getLastName(), getStreet(), getPostalCode(), getCity(), getBirthday());
+    }
+
+    // Convert from PersonData
+    public static Person fromPersonData(PersonData personData) {
+        Person person = new Person();
+        person.setFirstName(personData.getFirstName());
+        person.setLastName(personData.getLastName());
+        person.setStreet(personData.getStreet());
+        person.setPostalCode(personData.getPostalCode());
+        person.setCity(personData.getCity());
+        person.setBirthday(personData.getBirthday());
+        return person;
     }
 }

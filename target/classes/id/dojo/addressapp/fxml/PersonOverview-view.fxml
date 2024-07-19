@@ -58,9 +58,11 @@
                         <Label fx:id="birthdayLabel" layoutX="178.0" layoutY="137.0" text="LabelBirthday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Button layoutX="62.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewPerson" text="New" />
-                  <Button layoutX="152.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
-                  <Button layoutX="235.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                  <Button layoutX="107.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewPerson" text="New" />
+                  <Button layoutX="190.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
+                  <Button layoutX="271.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                  <Button layoutX="19.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleSavePerson" text="Save" />
+                  <Button layoutX="19.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleLoadPerson" text="Load" />
                </children>
             </AnchorPane>
          </items>

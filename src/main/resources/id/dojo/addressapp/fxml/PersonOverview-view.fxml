@@ -16,7 +16,7 @@
          <items>
             <AnchorPane prefHeight="298.0" prefWidth="358.0">
                <children>
-                  <TableView fx:id="personTable" layoutX="-32.0" prefHeight="298.0" prefWidth="391.0" styleClass="background" stylesheets="@css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="personTable" layoutX="-32.0" prefHeight="298.0" prefWidth="377.0" styleClass="background" stylesheets="@css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="113.0" text="First Name" />
                       <TableColumn fx:id="lastNameColumn" prefWidth="132.0" text="Last Name" />
@@ -58,9 +58,11 @@
                         <Label fx:id="birthdayLabel" layoutX="178.0" layoutY="137.0" text="LabelBirthday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Button layoutX="62.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewPerson" text="New" />
-                  <Button layoutX="152.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
-                  <Button layoutX="235.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                  <Button layoutX="107.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewPerson" text="New" />
+                  <Button layoutX="190.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
+                  <Button layoutX="271.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                  <Button layoutX="19.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleSavePerson" text="Save" />
+                  <Button layoutX="19.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleLoadPerson" text="Load" />
                </children>
             </AnchorPane>
          </items>

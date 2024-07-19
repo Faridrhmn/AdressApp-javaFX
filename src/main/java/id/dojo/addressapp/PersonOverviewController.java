@@ -1,5 +1,6 @@
 package id.dojo.addressapp;
 
+import id.dojo.addressapp.models.PersonData;
 import id.dojo.addressapp.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,7 +10,11 @@ import javafx.scene.control.TableView;
 import id.dojo.addressapp.MainApp;
 import id.dojo.addressapp.models.Person;
 
-public class PersonOverviewController {
+import java.io.*;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PersonOverviewController implements Serializable{
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -121,4 +126,54 @@ public class PersonOverviewController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void handleSavePerson() {
+        String fileName = "save/account.txt";
+        List<Person> accounts = personTable.getItems();
+        System.out.println("Number of persons to save: " + accounts.size());
+
+        if (accounts == null || accounts.isEmpty()) {
+            throw new RuntimeException("No accounts to save");
+        }
+
+        List<PersonData> personDataList = accounts.stream()
+                .map(Person::toPersonData)
+                .collect(Collectors.toList());
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+
+            objectOutputStream.writeObject(personDataList);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found: " + fileName, e);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while saving accounts", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error occurred", e);
+        }
+    }
+
+    @FXML
+    private void handleLoadPerson() {
+        String fileName = "save/account.txt";
+
+        try (FileInputStream fileInputStream = new FileInputStream(fileName);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+
+            List<PersonData> personDataList = (List<PersonData>) objectInputStream.readObject();
+            List<Person> accounts = personDataList.stream()
+                    .map(Person::fromPersonData)
+                    .collect(Collectors.toList());
+            personTable.getItems().setAll(accounts);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found: " + fileName, e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Error while loading accounts", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error occurred", e);
+        }
+    }
+
+
 }
